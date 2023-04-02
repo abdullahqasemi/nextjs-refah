@@ -21,6 +21,7 @@ type UserCreateDrawerProps = {
   setOpen: Function;
   addNewUser: Function;
   updateUser: Function;
+  onModalClose: Function;
   updateItem: UserType | undefined;
 };
 
@@ -38,11 +39,11 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
   addNewUser,
   updateUser,
   updateItem,
+  onModalClose,
 }) => {
   const [form] = Form.useForm();
   const [userImage, setUserImage] = useState(null);
   const [imageUrl, setImageUrl] = useState<string>();
-
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -51,7 +52,11 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
         name: updateItem?.name,
         email: updateItem?.email,
       });
+
       setImageUrl(updateItem?.profile);
+    } else {
+      setUserImage(null);
+      setImageUrl(undefined);
     }
   }, [isUpdate]);
 
@@ -59,6 +64,7 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
     setOpen(false);
     form.resetFields();
     setUserImage(null);
+    onModalClose();
   };
 
   const onCreate = (values: FormValuesType) => {
@@ -88,6 +94,7 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
         setUserImage(null);
         setOpen(false);
         setLoading(false);
+        onModalClose();
       })
       .catch((err) => {
         setLoading(false);
@@ -118,6 +125,7 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
         setUserImage(null);
         setOpen(false);
         setLoading(false);
+        onModalClose();
       })
       .catch((err) => {
         setLoading(false);
@@ -146,6 +154,7 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
           <Form layout="vertical" requiredMark form={form} onFinish={onFinish}>
             <div className="flex justify-center">
               <UserCreateImageUpload
+                isUpdate={isUpdate}
                 image={userImage}
                 setImage={setUserImage}
                 imageUrl={imageUrl}

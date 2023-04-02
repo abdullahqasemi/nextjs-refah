@@ -31,7 +31,7 @@ const CLayout: React.FC<MyPageProps> = ({ children }) => {
               {
                 key: "1",
                 icon: <UserOutlined />,
-                label: "nav 1",
+                label: "Users",
               },
               {
                 key: "2",

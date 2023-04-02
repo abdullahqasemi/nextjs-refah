@@ -28,6 +28,7 @@ type UserImageUploadedProps = {
   setImage: Function;
   imageUrl: string | undefined;
   setImageUrl: Function;
+  isUpdate: boolean;
 };
 
 const UserCreateImageUpload: React.FC<UserImageUploadedProps> = ({
@@ -35,17 +36,20 @@ const UserCreateImageUpload: React.FC<UserImageUploadedProps> = ({
   setImage,
   imageUrl,
   setImageUrl,
+  isUpdate,
 }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (image != null) {
-      getBase64(image as RcFile, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    } else {
-      setImageUrl(undefined);
+    if (!isUpdate) {
+      if (image != null) {
+        getBase64(image as RcFile, (url) => {
+          setLoading(false);
+          setImageUrl(url);
+        });
+      } else {
+        setImageUrl(undefined);
+      }
     }
   }, [image]);
 

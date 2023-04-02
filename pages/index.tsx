@@ -1,11 +1,11 @@
 import { NextPage } from "next";
 import CLayout from "../components/layout";
-import Datatable from "../components/user_data";
+import UserData from "../components/user_data";
 
 const Home: NextPage = () => {
   return (
     <CLayout>
-      <Datatable />
+      <UserData />
     </CLayout>
   );
 };
