@@ -196,6 +196,28 @@ const CreateUser: React.FC<UserCreateDrawerProps> = ({
                     {
                       type: "email",
                     },
+                    ({ getFieldValue }) => ({
+                      async validator(_, value) {
+                        return await axiosClient
+                          .get("/api/users/uniqueness", {
+                            params: {
+                              email: value,
+                              isUpdate,
+                              userID: updateItem?.id,
+                            },
+                          })
+                          .then((res) => {
+                            Promise.resolve();
+                          })
+                          .catch((e) => {
+                            return Promise.reject(
+                              new Error(
+                                "Email is taken, please try a different one!"
+                              )
+                            );
+                          });
+                      },
+                    }),
                   ]}
                 >
                   <Input placeholder="Email" />

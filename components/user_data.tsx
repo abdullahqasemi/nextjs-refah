@@ -5,7 +5,7 @@ import { type UserType, type TableParams } from "../configs/users_configs";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import CreateUser from "./create_user/user_create_modal";
 import { DeleteOutlined, EditOutlined, UserOutlined } from "@ant-design/icons";
-import Input from "antd/es/input/Input";
+import { Input } from "antd";
 
 const UserData: React.FC = () => {
   const [loading, setLoading] = useState(false);
