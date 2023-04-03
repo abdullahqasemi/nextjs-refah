@@ -21,7 +21,7 @@ yarn
 yarn dev
 ```
 
-### Or run run ``yarn build && yarn start`` to start a production server
+### Or run ``yarn build && yarn start`` to start a production server
 
 
 ```bash
